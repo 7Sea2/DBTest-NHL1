@@ -15,7 +15,7 @@ while (running)
 
     Console.WriteLine("--Main Menu");
     Console.WriteLine("1. Database Aanmaken");
-    Console.WriteLine("1. Vul Database");
+    Console.WriteLine("2. Vul Database");
     Console.WriteLine("3. Database Viewer");
     Console.WriteLine("4. Entry Aanpassen");
     Console.WriteLine("5. Entry Verwijderen");
