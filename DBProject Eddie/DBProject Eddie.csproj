@@ -9,11 +9,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="SQL\" />
+      <PackageReference Include="MySqlConnector" Version="2.6.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MySqlConnector" Version="2.6.2" />
+      <None Update="SQL\CreateDatabase.SQL">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="SQL\FillDatabase.SQL">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

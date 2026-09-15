@@ -1,7 +1,12 @@
-﻿using DBProject_Eddie;
-using MySqlConnector;
+﻿// !!!Important!!!
+// DATABASE DATA: Server=localhost Port=3306 Uid=root Pwd=1234
 
-// Connect aan de andere scripts in-file
+using DBProject_Eddie;
+using MySqlConnector;
+// Encoding type voor ASCII ( ☼ )
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+// Maak referenties naar de andere scripts in het project
 DatabaseManager databaseManager = new DatabaseManager();
 DatabaseViewer databaseViewer = new DatabaseViewer();
 
@@ -13,12 +18,12 @@ while (running)
 {
     Console.Clear();
 
-    Console.WriteLine("--Main Menu");
+    Console.WriteLine("☼ Main Menu ☼");
     Console.WriteLine("1. Database Aanmaken");
     Console.WriteLine("2. Vul Database");
     Console.WriteLine("3. Database Viewer");
-    Console.WriteLine("4. Entry Aanpassen");
-    Console.WriteLine("5. Entry Verwijderen");
+    Console.WriteLine("4. Klant Toevoegen");
+    Console.WriteLine("5. Klant Verwijderen");
     Console.WriteLine("6. ASCII");
     Console.WriteLine("7. Exit");
     Console.Write("Keuze: ");
@@ -44,12 +49,12 @@ while (running)
 
         case "4":
             Console.Clear();
-            Console.WriteLine("Not Implemented");
+            databaseManager.AddCustomer();
             break;
 
         case "5":
             Console.Clear();
-            Console.WriteLine("Not Implemented");
+            databaseManager.DeleteCustomer();
             break;
 
         case "6":
@@ -64,6 +69,7 @@ while (running)
             break;
 
         default:
+            Console.Clear();
             Console.WriteLine("Ongeldige keuze.");
             break;
     }
