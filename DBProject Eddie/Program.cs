@@ -9,6 +9,7 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 // Maak referenties naar de andere scripts in het project
 DatabaseManager databaseManager = new DatabaseManager();
 DatabaseViewer databaseViewer = new DatabaseViewer();
+ASCIIViewer ASCIIViewer = new ASCIIViewer();
 
 // Bool voor afsluiten
 bool running = true;
@@ -24,7 +25,7 @@ while (running)
     Console.WriteLine("3. Database Viewer");
     Console.WriteLine("4. Klant Toevoegen");
     Console.WriteLine("5. Klant Verwijderen");
-    Console.WriteLine("6. ASCII");
+    Console.WriteLine("6. Grafiekmaker");
     Console.WriteLine("7. Exit");
     Console.Write("Keuze: ");
 
@@ -59,7 +60,7 @@ while (running)
 
         case "6":
             Console.Clear();
-            Console.WriteLine("Not Implemented");
+            ASCIIViewer.ShowASCII();
             break;
 
         case "7":
