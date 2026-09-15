@@ -33,22 +33,46 @@ public class DatabaseManager
         }
         else
         {
-            Console.WriteLine("Database wordt gevuld...");
+            //Zorg er eerst voor dat je niet crasht wanneer er nog geen database is.
+            try
+            {
+                // Controleer of de database bestaat en bereikbaar is
+                using MySqlConnection connection = new MySqlConnection(NewConnectionString);
 
-            string fillSQL = File.ReadAllText("SQL/FillDatabase.sql");
+                connection.Open();
+                
+                Console.WriteLine("Database wordt gevuld...");
 
-            // Maak een verbinding met de MySQL database
-            using MySqlConnection connection = new MySqlConnection(connectionString);
-            // Maak een SQL command aan met de SQL-query en de databaseverbinding
-            using MySqlCommand command = new MySqlCommand(fillSQL, connection);
+                string fillSQL = File.ReadAllText("SQL/FillDatabase.sql");
+                
+                // Maak een SQL command aan met de SQL-query en de databaseverbinding
+                using MySqlCommand command = new MySqlCommand(fillSQL, connection);
 
-            connection.Open();
-            // Voer het voorheen aangemaakte SQL command uit
-            command.ExecuteNonQuery();
+                // Voer het voorheen aangemaakte SQL command uit
+                command.ExecuteNonQuery();
 
-            Console.WriteLine("Database succesvol gevuld!");
+                Console.WriteLine("Database succesvol gevuld!");
+            }
+            //Als de database nog neit is aangemaakt in Main Menu, wordt deze code uitgevoerd om een crash te voorkomen
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("☼ Vul Database ☼");
+                Console.WriteLine();
+
+                //1049 is de errorcode voor "database not found"
+                if (ex.Number == 1049)
+                {
+                    Console.WriteLine("De database is nog niet aangemaakt,");
+                    Console.WriteLine("maak eerst de database aan via het hoofdmenu.");
+                }
+                else
+                {
+                    Console.WriteLine("Er kon geen verbinding worden gemaakt met de database.");
+                }
+            }
         }
     }
+
 
     public void AddCustomer()
     {
@@ -146,7 +170,7 @@ public class DatabaseManager
             using MySqlCommand checkCommand = new MySqlCommand(checkSql, connection);
 
             checkCommand.Parameters.AddWithValue("@KlantID", klantID);
-            
+
             object? result = checkCommand.ExecuteScalar();
 
             if (result == null)
